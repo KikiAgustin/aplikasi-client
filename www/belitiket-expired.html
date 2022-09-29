@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- Fonts -->
+    <style>
+        .modalx {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.8);
+		z-index: 9999;
+	}
+    </style>
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/style1.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+	if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	
+ 	</script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+
+  <script type="text/javascript" src="js/iscroll.js"></script>
+	
+</head>
+
+  <body>
+    <div class="m-scene" id="main">
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue page" style="margin-top:0px !important;padding-top:56px">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+           <a onclick="javascript:fade('belitiket.html');" class="open-left waves-effect waves-circle">
+            <i class="fal fa-arrow-left"></i>
+          </a>
+           <span class="title">Pembelian Expired</span>
+        </div>
+               
+		<script>
+			
+			  var id = getvar('userid');
+			  var urls ="https://www.dfunstation.com/api4/android/index.php/world/tiket-read/"+id+"/?callback=?";
+		
+			  $.ajax({
+				  type: "GET",
+				  url: urls,
+				  crossDomain: true,
+				  cache: false,
+				  success: function(data){
+				  	
+					  var datalist;
+					  
+					  datalist = "";
+					  
+					  if(data['status']=="OK")
+					  {
+                        datalist += `
+                        <div class="blog-fullwidth animated fadein delay-1">
+                            <div class="blog-image">
+                                <img src="${data["detailgambar"]}" alt="" />
+                            </div>
+                            <div class="blog-preview p-20">
+                                <a onclick="modalx(this);" data-link="${data["barcode"]}" style="margin-bottom: 10px;" class="waves-effect waves-light btn">Lihat Barcode</a>
+                                <h4><strong>${data["nama"]}</strong></h4>
+                                <p>
+                                    <small>${data["ringkas"]}</small>
+                                    <br>Harga : Rp. ${data["totaltagihan"]}
+                                    <br> Tanggal Pembelian : ${data["create_date"]}
+                                    <br> Invoice : ${data["invoiceid"]}
+                                </p>
+                            </div>
+                        </div>
+                        `;
+						  $("#bloglist").append(datalist);
+						  delete(datalist);
+						
+					  }
+					 
+				  }
+			  });
+
+
+            function modalx(identifier) {
+                document.getElementById("myModal").style.display = "block";
+                var link = $(identifier).data("link");
+                $("#imgx").attr("src", link);
+                var openx = "javascript:window.open('"+link+"', '_system', 'location=yes')";
+                $("#dnx").attr("href", openx);
+            }
+            
+            function modalc() {
+                document.getElementById("myModal").style.display = "none";
+                $("#imgx").attr("src", "");
+                $("#dnx").attr("href", "");
+                location.reload()  
+            }
+	
+		</script>
+        
+      <!-- Main Content -->
+        <div class="animated fadein" id="bloglist"> 
+
+               
+        </div><br><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a onclick="javascript:fade('index.html')"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a onclick="javascript:fade('history.html')"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a onclick="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a onclick="javascript:fade('chat.html')"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a onclick="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+ </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/functions.js"></script>
+    <div id="myModal" class="modalx">
+        <!-- Modal content -->
+        <div class="modal-contentx">
+        <a href="" class="close" id="dnx" style="float:left"><i class="fal fa-download"></i></a><span class="close" onclick="modalc()"><i class="fal fa-times"></i></span>
+          <img src="" id="imgx">
+        </div>
+      
+    </div>
+  </body>
+</html>
