@@ -52,7 +52,8 @@ $(document).ready(function () {
                 $("#clm").html(datalist);
                 }else{
                     const datalist = `
-                    <p style="text-align:center;">Status Pembayaran <strong>${data['status_transaksi']}</strong> </p>
+                    <p style="text-align:center;">Status Pembayaran <strong>${data['status_transaksi']} </strong> Silahkan lakukan pembayaran sesuai dengan metode pembayaran yang telah dipilih </p>
+                    <button onClick="javascript:fade('index.html')" class="waves-effect waves-light btn accent-color width-100 m-b-20 animated bouncein delay-4 button button-block button-positive" id="lanjutan" >Kembali Ke home</button> 
                     `;
                     $("#clm").html(datalist);
                 }
