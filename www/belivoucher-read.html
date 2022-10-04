@@ -68,6 +68,11 @@
               var datalist;
 
               datalist = "";
+              let button1 = `
+                <div class="btn btn-default btn-block "  onClick="javascript:fade('belivoucher-send.html?action=read&id=${data['detailid']}&userid=${localStorage.userid}&idtransaksi=${data["idtransaksi"]}');">Beli Voucher Sekarang</div>
+              `;
+
+              let button2 = `<div class="btn btn-default btn-block disabled " >Voucher Sudah Tidak Tersedia</div>`;
 
               if (data['status'] == "OK") {
                 datalist += `
@@ -76,7 +81,7 @@
                     <p>${data["detailqty"]} Voucher Tersisa</p>
                     <p>${data["detaillengkap"]}</p>
                     <p><strong>Term and Condition</strong><br>${data["detailterm"]}</p>
-                    <div class="btn btn-default btn-block" onClick="javascript:fade('belivoucher-send.html?action=read&id=${data['detailid']}&userid=${localStorage.userid}&idtransaksi=${data["idtransaksi"]}');">Beli Voucher Sekarang</div>
+                    ${data["detailqty"] < 1 ? button2 : button1}
                   </div>
                 </div>
                 `;
