@@ -89,7 +89,7 @@ $(document).ready(function () {
 		 }
 		 
 		 function load_country_data2(limit, start) {
-			var urls =base_url + "index.php/world/community/"+start+"/"+limit+"/"+localStorage.lat+"/"+localStorage.long+"///?callback=?";
+			var urls =base_url + "index.php/world/world/"+start+"/"+limit+"/"+localStorage.lat+"/"+localStorage.long+"///?callback=?";
 			   $.ajax({
 			   type: "GET",
 			   url: urls,
