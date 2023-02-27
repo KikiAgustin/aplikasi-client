@@ -18,6 +18,7 @@
     <allow-intent href="geo:*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
+    <allow-navigation href="https://*.firebaseio.com/*" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>

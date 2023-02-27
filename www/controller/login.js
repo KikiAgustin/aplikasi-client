@@ -18,18 +18,32 @@ $(document).ready(function () {
     $("#login").click(function(){						   
 	   var email=$("#username").val();
        var password=$("#password").val();
-	  /* window.FirebasePlugin.getToken(function(token)
-	   {
-		  localStorage.deviceid = token;
-	   },function(error)
-	   {
-		 // swal(error);
-	   });
-		
-		var devices = device.model; 
-    	var dataString="username="+email+"&password="+password+"&deviceid="+localStorage.deviceid+"&device="+devices+"&fromapps=1";
-		
-		///**/ var dataString="username="+email+"&password="+password+"&deviceid="+localStorage.deviceid;
+
+	   document.addEventListener('deviceready', onDeviceReady, false);
+
+		function onDeviceReady() {
+		// Inisialisasi Firebase
+		firebase.initializeApp({
+			apiKey: "AIzaSyCHyyVFJTzK6wD1178rhwNk6CuTNMxmoVg",
+			authDomain: "login-dfs.firebaseapp.com",
+			projectId: "login-dfs",
+			storageBucket: "login-dfs.appspot.com",
+			messagingSenderId: "1051431316135",
+			appId: "1:1051431316135:web:eb70d94fdd2d437e1c4982",
+			measurementId: "G-93PGMD53KR"
+			// Masukkan konfigurasi Firebase Anda di sini
+		});
+
+		// Dapatkan token FCM
+		firebase.messaging().getToken().then(function(token) {
+			console.log(token);
+			// Lakukan sesuatu dengan token FCM di sini, misalnya kirim ke server
+		}).catch(function(error) {
+			console.log('Gagal mendapatkan token FCM: ' + error);
+		});
+		}
+
+		var dataString="username="+email+"&password="+password+"&deviceid="+token;
 		
 		if($.trim(email).length<3){ swal("Email masih kosong atau terlalu pendek"); }
 		if($.trim(password).length<3){ swal("Password masih kosong atau terlalu pendek"); }
