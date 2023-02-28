@@ -19,31 +19,8 @@ $(document).ready(function () {
 	   var email=$("#username").val();
        var password=$("#password").val();
 
-	   document.addEventListener('deviceready', onDeviceReady, false);
 
-		function onDeviceReady() {
-		// Inisialisasi Firebase
-		firebase.initializeApp({
-			apiKey: "AIzaSyCHyyVFJTzK6wD1178rhwNk6CuTNMxmoVg",
-			authDomain: "login-dfs.firebaseapp.com",
-			projectId: "login-dfs",
-			storageBucket: "login-dfs.appspot.com",
-			messagingSenderId: "1051431316135",
-			appId: "1:1051431316135:web:eb70d94fdd2d437e1c4982",
-			measurementId: "G-93PGMD53KR"
-			// Masukkan konfigurasi Firebase Anda di sini
-		});
-
-		// Dapatkan token FCM
-		firebase.messaging().getToken().then(function(token) {
-			console.log(token);
-			// Lakukan sesuatu dengan token FCM di sini, misalnya kirim ke server
-		}).catch(function(error) {
-			console.log('Gagal mendapatkan token FCM: ' + error);
-		});
-		}
-
-		var dataString="username="+email+"&password="+password+"&deviceid="+token;
+		var dataString="username="+email+"&password="+password+"&deviceid="+localStorage.deviceid;
 		
 		if($.trim(email).length<3){ swal("Email masih kosong atau terlalu pendek"); }
 		if($.trim(password).length<3){ swal("Password masih kosong atau terlalu pendek"); }
