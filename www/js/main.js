@@ -1,20 +1,18 @@
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady()
 {
-	 StatusBar.backgroundColorByHexString("#5a891f");
-
-	 const FirebasePlugin = cordova.require('cordova-plugin-firebase-messaging.FirebasePlugin');
+	StatusBar.backgroundColorByHexString("#5a891f");
 	 
-	 if(localStorage.getItem("deviceid") == null) 
+	if(localStorage.getItem("deviceid") == null) 
+	{
+	  window.FirebasePlugin.getToken(function(token)
 	 {
-		FirebasePlugin.getToken((token) => {
-			// Gunakan token untuk mengirimkan notifikasi ke instansi aplikasi ini
-			console.log('Token registrasi:', token);
-			localStorage.deviceid = token;
-		  }, (error) => {
-			console.error('Error saat mendapatkan token registrasi:', error);
-		});
-	}
+		 localStorage.deviceid = token;
+	  },function(error)
+	  {
+		// alert(error);
+	  });
+   }
 	
 	 /**/
 	 window.FirebasePlugin.onNotificationOpen(function(data)
