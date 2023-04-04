@@ -156,7 +156,6 @@
                     
                     $('#but_take').click(function(){
 						navigator.camera.getPicture(onSuccess, onFail, { quality: 50, correctOrientation : true,
-							allowEdit: true,
 							destinationType: Camera.DestinationType.FILE_URI
 						});
 					});
